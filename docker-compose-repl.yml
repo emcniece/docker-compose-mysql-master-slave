@@ -2,6 +2,7 @@ version: '2'
 services:
   mysqlconfigure:
     image: mysql:5.7.15
+    restart: on-failure
     environment:
       # Root for this db:
       - MYSQL_ROOT_PASSWORD=${MYSQL_REPL_ROOT_PASS}
