@@ -1,0 +1,9 @@
+version: '2'
+services:
+  mysqlslave:
+    image: mysql:5.7.15
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_SLAVE_ROOT_PASS}
+    volumes:
+      - ./data/mysql-slave:/var/lib/mysql/
+      - ./config/mysql-slave:/etc/mysql/conf.d/

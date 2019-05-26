@@ -1,0 +1,19 @@
+version: '2'
+services:
+  mysqlconfigure:
+    image: mysql:5.7.15
+    environment:
+      # Root for this db:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_REPL_ROOT_PASS}
+      # Connecting DBs:
+      - MYSQL_SLAVE_PASSWORD=${MYSQL_SLAVE_ROOT_PASS}
+      - MYSQL_MASTER_PASSWORD=${MYSQL_MASTER_ROOT_PASS}
+      - MYSQL_REPLICATION_USER=repl
+      - MYSQL_REPLICATION_PASSWORD=${MYSQL_REPL_ROOT_PASS}
+      - MYSQL_MASTER_IP=${MYSQL_MASTER_IP}
+      - MYSQL_SLAVE_IP=${MYSQL_SLAVE_IP}
+    volumes:
+      - ./mysql_connector.sh:/tmp/mysql_connector.sh
+    command: /bin/bash -x /tmp/mysql_connector.sh
+  #haproxy:
+  #...

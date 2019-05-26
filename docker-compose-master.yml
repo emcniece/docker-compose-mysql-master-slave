@@ -1,0 +1,9 @@
+version: '2'
+services:
+  mysqlmaster:
+    image: mysql:5.7.15
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_MASTER_ROOT_PASS}
+    volumes:
+      - ./data/mysql-master:/var/lib/mysql/
+      - ./config/mysql-master:/etc/mysql/conf.d/
