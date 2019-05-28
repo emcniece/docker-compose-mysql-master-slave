@@ -30,4 +30,14 @@ services:
       - MYSQL_SLAVE_IP=${MYSQL_SLAVE_IP}
       - HAPROXY_AUTH_USER=${HAPROXY_AUTH_USER}
       - HAPROXY_AUTH_PASSWORD=${HAPROXY_AUTH_PASSWORD}
-
+  postfix_relay:
+    image: juanluisbaptiste/postfix:latest
+    restart: on-failure
+    ports:
+      - 25:25
+    environment:
+      - SMTP_SERVER=${SMTP_SERVER}
+      - SMTP_PORT=${SMTP_PORT}
+      - SMTP_USERNAME=${SMTP_USERNAME}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
+      - SERVER_HOSTNAME=${SERVER_HOSTNAME}
