@@ -16,7 +16,7 @@ services:
     volumes:
       - ./mysql_connector.sh:/tmp/mysql_connector.sh
     command: /bin/bash -x /tmp/mysql_connector.sh
-  haproxy:
+  haproxy_mysql:
     image: haproxy:1-alpine
     restart: on-failure
     ports:
