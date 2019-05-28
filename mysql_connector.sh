@@ -50,6 +50,13 @@ mysql --host $MYSQL_SLAVE_IP -uroot -p$MYSQL_SLAVE_PASSWORD -AN -e 'set GLOBAL m
 
 mysql --host $MYSQL_SLAVE_IP -uroot -p$MYSQL_SLAVE_PASSWORD -e "show slave status \G"
 
+echo "Creating haproxy_check user"
+mysql --host $MYSQL_MASTER_IP -uroot -p$MYSQL_MASTER_PASSWORD -AN -e "CREATE USER 'haproxy_check'@'%';";
+
+echo "Check user replication to slave"
+mysql --host $MYSQL_SLAVE_IP -uroot -p$MYSQL_SLAVE_PASSWORD -AN -e "SELECT user, host FROM mysql.user;";
+
+
 echo "MySQL servers created!"
 echo "--------------------"
 echo

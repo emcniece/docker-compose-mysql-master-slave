@@ -16,5 +16,18 @@ services:
     volumes:
       - ./mysql_connector.sh:/tmp/mysql_connector.sh
     command: /bin/bash -x /tmp/mysql_connector.sh
-  #haproxy:
-  #...
+  haproxy:
+    image: haproxy:1-alpine
+    restart: on-failure
+    ports:
+      - 3306:3306
+      - 3307:3307
+      - 8080:8080
+    volumes:
+      - ./config/haproxy/haproxy_mysql.cfg:/usr/local/etc/haproxy/haproxy.cfg
+    environment:
+      - MYSQL_MASTER_IP=${MYSQL_MASTER_IP}
+      - MYSQL_SLAVE_IP=${MYSQL_SLAVE_IP}
+      - HAPROXY_AUTH_USER=${HAPROXY_AUTH_USER}
+      - HAPROXY_AUTH_PASSWORD=${HAPROXY_AUTH_PASSWORD}
+
